@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Email:
+  = @user.email
+%p
+  %strong Name:
+  = @user.name
+%p
+  %strong Birthday:
+  = @user.birthday
+= link_to 'Index', users_path
+|
+= link_to 're-create', "/create_fast?name=#{@user.name}&email=#{@user.email}"

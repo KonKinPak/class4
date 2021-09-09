@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+<p>
+  <strong>Birthday:</strong>
+  <%= @user.birthday %>
+</p>
+<%= link_to 'Index', users_path %>
+
+<%= link_to 're-create', "/create_fast?name=#{@user.name}&email=#{@user.email}" %>
