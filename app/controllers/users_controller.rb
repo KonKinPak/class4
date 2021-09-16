@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
+  before_action(:set_user, only: [:show, :edit, :update, :destroy])
+  #do function set user before do
+
   # GET /users or /users.json
   def index
     @users = User.all
@@ -69,7 +72,7 @@ class UsersController < ApplicationController
   #end
 
   def create_fast
-    @user = User.create(name:params[:name],email:params[:email])
+    @user = User.create(name:params[:name],email:params[:email],address:params[:address],postal_code:params[:postal_code])
     #respond_to do |format|
     #format.html { redirect_to @user, notice: "User was successfully re-created." }
     #format.json { head :no_content }
@@ -84,6 +87,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:email, :name, :birthday)
+      params.require(:user).permit(:email, :name, :birthday, :address, :postal_code)
     end
 end
