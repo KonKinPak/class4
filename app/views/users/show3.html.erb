@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>address:</strong>
+  <%= @user.address %>
+</p>
+
+<p>
+  <strong>Postal Code:</strong>
+  <%= @user.postal_code %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @user.pass %>
+</p>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Message</th>
+      <th>Create_at</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.posts.each do |post| %>
+      <tr>
+        <td><%= post.msg %></td>
+        <td><%= post.created_at.to_formatted_s(:short) %></td>
+        <td><%= link_to 'Edit', "/editPost?uid=#{@user.id}&pid=#{post.id}" %></td>
+        <td><%= link_to 'Delete', "/show3?uid=#{@user.id}&pid=#{post.id}", method: :delete, data: { confirm: 'Are you sure?'} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<%= link_to 'User', "/edit2?id=#{@user.id}" %> 
+<%= link_to 'Post', "/post/new?id=#{@user.id}" %>

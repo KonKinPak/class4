@@ -1,0 +1,22 @@
+/ = form_with(model: user) do |form|
+/  - if user.errors.any?
+/    #error_explanation
+/      %h2
+/        = pluralize(user.errors.count, "error")
+/        prohibited this user from being saved:
+/     %ul
+/        - user.errors.each do |error|
+/          %li= error.full_message
+%p#alert= alert
+= form_with do |form|
+	.field
+		=form.label :email 
+		=form.text_field :email
+		=form.label :pass ,"password"
+		=form.text_field :pass
+		%br
+		=form.submit "Log in"
+/ normal route (exist & correct pass)
+
+/ not exist or wrong pass
+

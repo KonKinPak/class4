@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy edit2 post newPost ]
+class PostsController < ApplicationController
+ before_action :set_user, only: %i[ show edit update destroy edit2 post newPost ]
 
   #before_action(:set_user, only: [:show, :edit, :update, :destroy])
   #do function set user before do
@@ -104,9 +104,9 @@ class UsersController < ApplicationController
   end   
   def updatePost
     @user = User.find(params[:post][:user_id])
-    @post = @user.posts.find(params[:post][:id])
+    @post = @user.posts.find(params[:id])
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(params[:post])
         #redirect_to = go to url user
         format.html do
          redirect_to "/show3?email=#{@user.email}&pass=#{@user.pass}", notice: "Post was successfully updated." 
@@ -116,16 +116,6 @@ class UsersController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def destroyPost
-    @user = User.find(params[:uid])
-    @post = @user.posts.find(params[:pid])
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to "/show3?email=#{@user.email}&pass=#{@user.pass}", notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
@@ -154,16 +144,12 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
+    def set_post
+      @post = Post.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:email, :name, :birthday, :address, :postal_code,:pass,:id)
-    end
-
     def post_params
-      params.require(:post).permit(:msg, :id, :user_id)
+      params.require(:user).permit(:email, :name, :birthday, :address, :postal_code,:pass,:id,)
     end
 end

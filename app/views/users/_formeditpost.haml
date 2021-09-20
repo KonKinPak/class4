@@ -1,0 +1,16 @@
+= form_with(model: post, url:"/post",method: :patch) do |form|
+  - if post.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(posterrors.count, "error")
+        prohibited this post from being saved:
+      %ul
+        - post.errors.each do |error|
+          %li= error.full_message
+  .field
+    = form.label :msg
+    = form.text_field :msg
+  .actions
+    = form.submit
+  = form.hidden_field :id
+  = form.hidden_field :user_id
