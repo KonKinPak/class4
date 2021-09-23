@@ -27,7 +27,7 @@
 
 <p>
   <strong>Password:</strong>
-  <%= @user.pass %>
+  <%= @user.password_digest %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

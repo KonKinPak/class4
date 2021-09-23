@@ -22,7 +22,7 @@
 
 <p>
   <strong>Password:</strong>
-  <%= @user.pass %>
+  <%= @user.password %>
 </p>
 
 
@@ -40,8 +40,8 @@
       <tr>
         <td><%= post.msg %></td>
         <td><%= post.created_at.to_formatted_s(:short) %></td>
-        <td><%= link_to 'Edit', "/editPost?uid=#{@user.id}&pid=#{post.id}" %></td>
-        <td><%= link_to 'Delete', "/show3?uid=#{@user.id}&pid=#{post.id}", method: :delete, data: { confirm: 'Are you sure?'} %></td>
+        <td><%= link_to 'Edit', edit_post_path(post.id) %></td>
+        <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?'} %></td>
       </tr>
     <% end %>
   </tbody>
@@ -50,4 +50,6 @@
 
 
 <%= link_to 'User', "/edit2?id=#{@user.id}" %> 
-<%= link_to 'Post', "/post/new?id=#{@user.id}" %>
+<%= link_to 'Post', new_post_path %>
+<br>
+<%= link_to 'Log out', main_path %>

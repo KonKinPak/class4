@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts
   resources :users
   #resources :posts
   #resources is 
@@ -11,16 +12,17 @@ Rails.application.routes.draw do
   get 'create_fast', to: 'users#create_fast'
   get 'users/show2' ,to: 'users#show2'
   get 'main' ,to: 'users#main'
-  post 'main', to: 'users#show3'
+  post 'main', to: 'users#log_in'
   get 'edit2', to:'users#edit2'
   patch 'edit2', to:'users#update2'
   get 'show3', to:'users#show3'
 
-
-  get 'post', to:'users#post'
-  get 'post/new', to:'users#newPost'
-  get 'newpost', to:'users#createPost'
-  patch 'post', to:'users#updatePost'
-  get 'editPost', to: 'users#editPost'
-  delete 'show3', to: 'users#destroyPost'
+ 
+  #get 'post', to:'users#post'
+  #get 'post/new', to:'users#newPost'
+  #get 'newpost', to:'users#createPost'
+  #patch 'post', to:'users#updatePost'
+  #get 'editPost', to: 'users#editPost'
+  #delete 'show3', to: 'users#destroyPost'
+  
 end
