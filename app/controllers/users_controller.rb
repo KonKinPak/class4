@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy edit2 post newPost ] 
-  before_action :logged_in, except: %i[main index log_in new create show edit destroy update create_fast]
+  before_action :logged_in, except: %i[main index log_in new create show  edit destroy update create_fast]
   #before_action(:set_user, only: [:show, :edit, :update, :destroy])
   #do function set user before do
   def main
@@ -72,16 +72,22 @@ class UsersController < ApplicationController
   end
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        #redirect_to = go to url user
-        format.html do
-         redirect_to @user, notice: "User was successfully updated." 
+    puts session[:user_id]
+    puts params[:id]
+    unless(session[:user_id].to_s == params[:id].to_s)
+      redirect_to show3_path, notice: "That's not your id"
+    else
+      respond_to do |format|
+        if @user.update(user_params)
+          #redirect_to = go to url user
+          format.html do
+          redirect_to @user, notice: "User was successfully updated." 
+          end
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -162,7 +168,7 @@ class UsersController < ApplicationController
   end
 
   def create_fast
-    @user = User.create(name:params[:name],email:params[:email],password:"t")
+    @user = User.create(name:params[:name],email:params[:email],password:"1234")
 
     #respond_to do |format|
     #format.html { redirect_to @user, notice: "User was successfully re-created." }
